@@ -11,23 +11,22 @@
     </div>
 </template>
 <script setup>
-import axios from 'axios';
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const repos = ref(null)
+
 const getGithubRepos = async () => {
     try {
-        const { data } = await axios.get('https://api.github.com/users/ndanev/repos');
-        const filteredRepos = data.filter((repo) => {
-            return !repo.private
-        })
-        repos.value = filteredRepos
+      const {	data } = await useFetch('https://api.github.com/users/ndanev/repos')
+      const filteredRepos = data.value.filter((repo) => {
+        return !repo.private
+      })
+      repos.value = filteredRepos
     } catch (error) {
         console.log("Error:", error.message)
     }
 }
-onMounted(() => {
-    getGithubRepos()
-})
+
+getGithubRepos()
 </script>
 <style></style>
