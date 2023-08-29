@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
   app: {
     head: {
       meta: [
@@ -12,7 +13,8 @@ export default defineNuxtConfig({
   css: ["@/assets/style/main.scss"],
   vite: {
     build: {
-      minify: 'esbuild'
+      minify: true,
+      cssCodeSplit: true,
     }
   },
   devtools: { enabled: false },
